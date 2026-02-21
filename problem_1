@@ -1,0 +1,25 @@
+/*
+ps 1
+*/
+with student_grade as (
+    select s.ID, s.Name, s.Marks, g.Grade
+    from Students s
+    join Grades g
+    on s.Marks between g.Min_Mark and g.Max_Mark
+)
+select 
+    case
+        when Grade < 8 then Null
+        else Name 
+    end as Name,
+    Grade,
+    Marks
+from student_grade
+order by
+    grade desc,
+    case
+        when grade >= 8 then name
+    end asc,
+    case
+        when grade < 8 then marks
+    end asc;
